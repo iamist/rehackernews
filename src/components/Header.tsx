@@ -38,7 +38,7 @@ const Header: React.FC = () => {
                             </Link>
                         </li>
                         <li className="mr-1">
-                            <Link className="border-zinc-800 border-r-2 px-2" to="/submit">
+                            <Link className="px-2" to="/submit">
                                 submit
                             </Link>
                         </li>
