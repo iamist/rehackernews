@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import useStoriesApi from '../hooks/useStoriesApi';
 import Loading from '../components/Loading';
 import StoryCard from '../components/StoryCard';

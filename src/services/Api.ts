@@ -1,5 +1,5 @@
 // import React, {useEffect, useState} from 'react';
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
 
 class Api {
 

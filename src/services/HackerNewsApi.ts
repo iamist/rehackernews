@@ -45,7 +45,7 @@ class HackerNewsApi extends Api {
 
         const _this = this;
         let comments;
-        let [error, data] = (storyInfo && id != storyInfo.id) ? await this.getItemInfo(id) : [false, storyInfo];
+        let [error, data] = (storyInfo && id !== storyInfo.id) ? await this.getItemInfo(id) : [false, storyInfo];
         if (error) return [error, storyInfo];
 
         if (data && data.kids) {
@@ -57,8 +57,11 @@ class HackerNewsApi extends Api {
                 data.kids.slice(0, 10).map((kid: number) => {
                     async function getKids() {
                         let [error, kidInfo] = await _this.getStory(kid, data);
-                        let children: {[k: string]: StoryInterface[]} = {};
-                        data.children.push(children[kid] = kidInfo);
+                        if (!error) {
+                            let children: {[k: string]: StoryInterface[]} = {};
+                            data.children.push(children[kid] = kidInfo);
+                        }
+
                         return kidInfo;
                     }
 
@@ -71,6 +74,8 @@ class HackerNewsApi extends Api {
                     if (data.status === 'fulfilled') {
                         return data.value;
                     }
+
+                    return false;
                 })
             }
         }
