@@ -8,7 +8,7 @@ const Header: React.FC = () => {
             <div className="flex items-center justify-between bg-orange-500 p-1">
                 <div className="brand flex items-center flex-shrink-0 mr-2">
                     <img src={logo} alt="logo" className='border border-white mr-2' />
-                    <h1 className="font-bold">Hacker News</h1>
+                    <h1 className="font-bold"><Link to="/">Hacker News</Link></h1>
                 </div>
                 <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
                     <ul className="nav-menu flex flex-1 list-none">
