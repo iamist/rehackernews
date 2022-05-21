@@ -40,14 +40,14 @@ const Comment: React.FC<CommentInterface> = ({
 
     return (
         <>
-            <ul className="text-sm ml-4 my-2">
+            <ul key={id} title={`${id}`} className="text-sm ml-4 my-2">
                 <li className='ml-4 px-2'>
                     <ul className="list-none flex flex-row text-xs">
-                        <li className="text-gray-500">
+                        <li className="text-gray-500 mr-1">
                             {by}
                         </li>
                         <li className="text-gray-500">
-                            {moment(time).fromNow()}
+                            {time && moment(moment.unix(time).format('YYYY-MM-DD HH:mm:ss'), 'YYYY-MM-DD HH:mm:ss').fromNow()}
                         </li>
                         {rootLink}
                         {parentLink}

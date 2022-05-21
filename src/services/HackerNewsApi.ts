@@ -27,6 +27,8 @@ class HackerNewsApi extends Api {
                 if (data.status === 'fulfilled') {
                     return data.value;
                 }
+
+                return false;
             })
         }
 
@@ -35,35 +37,28 @@ class HackerNewsApi extends Api {
 
     public async getStory(
         id: number,
-        storyInfo: StoryInterface,
+        storyInfo?: StoryInterface,
         comemntIds?: Array<number>,
         maxParentCommentCount?: number | 30,
         maxChildComemntCount?: number | 10
     ) {
 
         const _this = this;
-        let [error, data] = await this.getItemInfo(id);
         let comments;
+        let [error, data] = (storyInfo && id != storyInfo.id) ? await this.getItemInfo(id) : [false, storyInfo];
         if (error) return [error, storyInfo];
 
         if (data && data.kids) {
-            storyInfo = data;
-            if (!storyInfo.children) {
-                storyInfo.children = [];
+            if (!data.children) {
+                data.children = [];
             }
 
             const allKidsResponse = await Promise.allSettled(
                 data.kids.slice(0, 10).map((kid: number) => {
                     async function getKids() {
-                        let [error, kidInfo] = await _this.getItemInfo(kid);
-                        if (!error && kidInfo.kids) {
-                            [error, kidInfo] = await _this.getStory(kid, kidInfo);
-                            if (!error && storyInfo.children) {
-                                let children: {[k: string]: StoryInterface[]} = {};
-                                storyInfo.children.push(children[kid] = kidInfo);
-                            }
-                        }
-
+                        let [error, kidInfo] = await _this.getStory(kid, data);
+                        let children: {[k: string]: StoryInterface[]} = {};
+                        data.children.push(children[kid] = kidInfo);
                         return kidInfo;
                     }
 
@@ -80,7 +75,7 @@ class HackerNewsApi extends Api {
             }
         }
 
-        return [error, storyInfo, comments];
+        return [error, data, comments];
     }
 
     /**

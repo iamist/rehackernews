@@ -45,7 +45,6 @@ const Story : React.FC = () => {
                 <h2 className="text-sm text-black">{story.title}</h2>
             </div>
             <StoryMeta {...story} />
-            {console.log('rndered')}
             {comments && comments.map( comment => <Comment {...comment} />)}
         </>
     );
