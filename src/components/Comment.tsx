@@ -40,7 +40,7 @@ const Comment: React.FC<CommentInterface> = ({
 
     return (
         <>
-            <ul key={id} title={`${id}`} className="text-sm ml-4 my-2">
+            <ul className="text-sm ml-4 my-2">
                 <li className='ml-4 px-2'>
                     <ul className="list-none flex flex-row text-xs">
                         <li className="text-gray-500 mr-1">
@@ -59,7 +59,7 @@ const Comment: React.FC<CommentInterface> = ({
                         </a>
                         <div className="text-sm text-left" dangerouslySetInnerHTML={{__html: sanitizeHtml(text ? text : '', htmlOptions)}} />
                     </div>
-                    {children && children.map(childComment => <Comment {...childComment} />)}
+                    {children && children.map(childComment => <Comment key={childComment.id} {...childComment} />)}
                 </li>
             </ul>
         </>

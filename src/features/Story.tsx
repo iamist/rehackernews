@@ -45,7 +45,7 @@ const Story : React.FC = () => {
                 <h2 className="text-sm text-black">{story.title}</h2>
             </div>
             <StoryMeta {...story} />
-            {comments && comments.map( comment => <Comment {...comment} />)}
+            {comments && comments.map( comment => <Comment key={comment.id} {...comment} />)}
         </>
     );
 }
