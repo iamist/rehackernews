@@ -6,7 +6,7 @@ import StoryCard from '../components/StoryCard';
 import { StoryInterface } from '../services/types/StoryInterface';
 
 const NewStories: React.FC = () => {
-    const {loading, error, stories} = useStoriesApi('topstories');
+    const {loading, error, stories} = useStoriesApi('newstories');
 
 
     if (error) return null;

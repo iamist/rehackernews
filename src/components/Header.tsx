@@ -1,6 +1,6 @@
 import React from 'react';
 import logo from '../img/y18.gif';
-import { Link } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 
 const Header: React.FC = () => {
     return (
@@ -13,14 +13,24 @@ const Header: React.FC = () => {
                 <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
                     <ul className="nav-menu flex flex-1 list-none">
                         <li className="mr-1">
-                            <Link className="border-zinc-800 border-r-2 px-2" to="/new">
+                            <NavLink to="/newstories"
+                            className={
+                                ({isActive}) =>
+                                'border-zinc-800 border-r-2 px-2 ' +
+                                (isActive ? 'text-white' : 'text-black')
+                            }>
                                 new
-                            </Link>
+                            </NavLink>
                         </li>
                         <li className="mr-1">
-                            <Link className="border-zinc-800 border-r-2 px-2" to="/past">
+                            <NavLink to="/beststories"
+                            className={
+                                ({isActive}) =>
+                                'border-zinc-800 border-r-2 px-2 ' +
+                                (isActive ? 'text-white' : 'text-black')
+                            }>
                                 past
-                            </Link>
+                            </NavLink>
                         </li>
                         <li className="mr-1">
                             <Link className="border-zinc-800 border-r-2 px-2" to="/comments">
