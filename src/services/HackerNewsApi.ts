@@ -54,7 +54,7 @@ class HackerNewsApi extends Api {
             }
 
             const allKidsResponse = await Promise.allSettled(
-                data.kids.slice(0, 10).map((kid: number) => {
+                data.kids.map((kid: number) => {
                     async function getKids() {
                         let [error, kidInfo] = await _this.getStory(kid, data);
                         if (!error) {
